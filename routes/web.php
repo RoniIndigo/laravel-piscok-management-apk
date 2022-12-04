@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan.index');
         Route::get('/penjualan/{id}', [PenjualanController::class, 'show'])->name('penjualan.show');
         Route::delete('/penjualan/{id}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
+        Route::resource('/penjualan', PenjualanController::class);
         
         Route::get('/Reques/data', [RequesController::class, 'data'])->name('reques.data');
         Route::get('/Reques', [RequesController::class, 'index'])->name('reques.index');
