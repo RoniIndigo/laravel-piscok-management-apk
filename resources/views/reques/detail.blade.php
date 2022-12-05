@@ -14,7 +14,7 @@
                         <th>Nama</th>
                         <th>Harga</th>
                         <th>Jumlah</th>
-                        <th>Subtotal</th>
+                        <th>Tagihan Untuk Admin Cabang</th>
                     </thead>
                 </table>
             </div>

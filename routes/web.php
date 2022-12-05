@@ -72,18 +72,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/penjualan/{id}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
         Route::resource('/penjualan', PenjualanController::class);
         
-        Route::get('/Reques/data', [RequesController::class, 'data'])->name('reques.data');
-        Route::get('/Reques', [RequesController::class, 'index'])->name('reques.index');
-        Route::get('/Reques/{id}', [RequesController::class, 'show'])->name('reques.show');
-        Route::delete('/Reques/{id}', [RequesController::class, 'destroy'])->name('reques.destroy');
+        Route::get('/reques/data', [RequesController::class, 'data'])->name('reques.data');
+        Route::resource('/reques', RequesController::class);
     });
 
     Route::group(['middleware' => 'level:1,2'], function () {
         Route::get('/permintaan/baru', [RequesController::class, 'create'])->name('permintaan.baru');
         Route::post('/permintaan/simpan', [RequesController::class, 'store'])->name('permintaan.simpan');
         Route::get('/permintaan/selesai', [RequesController::class, 'selesai'])->name('permintaan.selesai');
-        Route::get('/permintaan/nota-kecil', [RequesController::class, 'notaKecil'])->name('permintaan.nota_kecil');
-        Route::get('/permintaan/nota-besar', [RequesController::class, 'notaBesar'])->name('permintaan.nota_besar');
+        // Route::get('/permintaan/nota-kecil', [RequesController::class, 'notaKecil'])->name('permintaan.nota_kecil');
+        // Route::get('/permintaan/nota-besar', [RequesController::class, 'notaBesar'])->name('permintaan.nota_besar');
 
         Route::get('/permintaan/{id}/data', [RequesDetailController::class, 'data'])->name('permintaan.data');
         Route::get('/permintaan/loadform/{diskon}/{total}/{diterima}', [RequesDetailController::class, 'loadForm'])->name('permintaan.load_form');

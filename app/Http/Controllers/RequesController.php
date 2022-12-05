@@ -35,10 +35,19 @@ class RequesController extends Controller
             ->of($reques)
             ->addIndexColumn()
             ->addColumn('total_item', function ($reques) {
-                return format_uang($$reques->total_item);
+                return format_uang($reques->total_item);
+            })
+            ->addColumn('total_harga', function ($reques) {
+                return 'Rp. '. format_uang($reques->total_harga);
+            })
+            ->addColumn('bayar', function ($reques) {
+                return 'Rp. '. format_uang($reques->bayar);
             })
             ->addColumn('tanggal', function ($reques) {
                 return tanggal_indonesia($reques->created_at, false);
+            })
+            ->editColumn('diskon', function ($reques) {
+                return $reques->diskon . '%';
             })
             ->addColumn('kode_member', function ($reques) {
                 $member = $reques->member->kode_member ?? '';
@@ -51,6 +60,7 @@ class RequesController extends Controller
                 return '
                 <div class="btn-group">
                     <button onclick="showDetail(`'. route('reques.show', $reques->id_reques) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
+                    <button onclick="editForm(`'. route('reques.update', $reques->id_reques) .'`)" class="btn btn-xs btn-edit btn-flat"><i class="fa fa-pencil"></i></button>
                     <button onclick="deleteData(`'. route('reques.destroy', $reques->id_reques) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
@@ -64,6 +74,10 @@ class RequesController extends Controller
         $reques = new Reques();
         $reques->id_member = null;
         $reques->total_item = 0;
+        $reques->total_harga = 0;
+        $reques->diskon = 0;
+        $reques->bayar = 0;
+        $reques->diterima = 0;
         $reques->id_user = auth()->id();
         $reques->save();
 
@@ -187,34 +201,34 @@ class RequesController extends Controller
         return view('reques.selesai', compact('setting'));
     }
     
-    public function notaKecil()
-    {
-        $setting = Setting::first();
-        $reques = Reques::find(session('id_reques'));
-        if (! $reques) {
-            abort(404);
-        }
-        $detail = RequesDetail::with('produk')
-            ->where('id_reques', session('id_reques'))
-            ->get();
+    // public function notaKecil()
+    // {
+    //     $setting = Setting::first();
+    //     $reques = Reques::find(session('id_reques'));
+    //     if (! $reques) {
+    //         abort(404);
+    //     }
+    //     $detail = RequesDetail::with('produk')
+    //         ->where('id_reques', session('id_reques'))
+    //         ->get();
         
-        return view('reques.nota_kecil', compact('setting', 'reques', 'detail'));
-    }
+    //     return view('reques.nota_kecil', compact('setting', 'reques', 'detail'));
+    // }
 
-    public function notaBesar()
-    {
-        $setting = Setting::first();
-        $reques = Reques::find(session('id_reques'));
-        if (! $reques) {
-            abort(404);
-        }
-        $detail = RequesDetail::with('produk')
-            ->where('id_reques', session('id_reques'))
-            ->get();
+    // public function notaBesar()
+    // {
+    //     $setting = Setting::first();
+    //     $reques = Reques::find(session('id_reques'));
+    //     if (! $reques) {
+    //         abort(404);
+    //     }
+    //     $detail = RequesDetail::with('produk')
+    //         ->where('id_reques', session('id_reques'))
+    //         ->get();
 
-        $pdf = PDF::loadView('reques.nota_besar', compact('setting', 'reques', 'detail'));
-        $pdf->setPaper(0,0,609,440, 'potrait');
-        return $pdf->stream('Permintaan-'. date('Y-m-d-his') .'.pdf');
-    }
+    //     $pdf = PDF::loadView('reques.nota_besar', compact('setting', 'reques', 'detail'));
+    //     $pdf->setPaper(0,0,609,440, 'potrait');
+    //     return $pdf->stream('Permintaan-'. date('Y-m-d-his') .'.pdf');
+    // }
 
 }

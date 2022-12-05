@@ -22,12 +22,12 @@
                 </div>
             </div>
             <div class="box-footer">
-                <!--@if ($setting->tipe_nota == 1)
+                {{-- <!--@if ($setting->tipe_nota == 1)
                 <button class="btn btn-warning btn-flat" onclick="notaKecil('{{ route('reques.nota_kecil') }}', 'Nota Kecil')">Cetak Ulang Nota</button>
                 @else
                 <button class="btn btn-warning btn-flat" onclick="notaBesar('{{ route('reques.nota_besar') }}', 'Nota PDF')">Cetak Ulang Nota</button>
-                @endif-->
-                <a href="{{ route('reques.baru') }}" class="btn btn-primary btn-flat">Request Baru</a>
+                @endif--> --}}
+                <a href="{{ route('permintaan.baru') }}" class="btn btn-primary btn-flat">Request Baru</a>
             </div>
         </div>
     </div>

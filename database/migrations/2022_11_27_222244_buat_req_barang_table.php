@@ -14,7 +14,7 @@ class BuatReqBarangTable extends Migration
     public function up()
     {
         Schema::create('reques', function (Blueprint $table) {
-            $table->increments('id_request');
+            $table->increments('id_reques');
             $table->integer('id_member');
             $table->integer('total_item');
             $table->integer('total_harga');
@@ -22,7 +22,7 @@ class BuatReqBarangTable extends Migration
             $table->integer('bayar')->default(0);
             $table->integer('diterima')->default(0);
             $table->integer('id_user');
-            $table->integer('status')->default(1);
+            $table->String('status')->default('Barang Belum Dikirim');
             $table->timestamps();
         });
     }

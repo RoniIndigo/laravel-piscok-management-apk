@@ -96,6 +96,33 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row" hidden>
+                                <label for="diskon" class="col-lg-2 control-label">Diskon</label>
+                                <div class="col-lg-8">
+                                    <input type="number" name="diskon" id="diskon" class="form-control" 
+                                        value="{{ ! empty($memberSelected->id_member) ? $diskon : 0 }}" 
+                                        readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row" hidden>
+                                <label for="bayar" class="col-lg-2 control-label">Bayar</label>
+                                <div class="col-lg-8">
+                                    <input type="text" id="bayarrp" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row" hidden>
+                                <label for="diterima" class="col-lg-2 control-label">Diterima</label>
+                                <div class="col-lg-8">
+                                    <input type="number" id="diterima" class="form-control" name="diterima" 
+                                    value="{{ $reques->diterima ?? 0 }}">
+                                </div>
+                            </div>
+                            <div class="form-group row" hidden>
+                                <label for="kembali" class="col-lg-2 control-label">Kembali</label>
+                                <div class="col-lg-8">
+                                    <input type="text" id="kembali" name="kembali" class="form-control" value="0" readonly>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

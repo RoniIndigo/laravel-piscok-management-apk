@@ -79,7 +79,7 @@
             </li>
             <li>
                 <a href="{{ route('permintaan.baru') }}">
-                    <i class="fa fa-cart-arrow-down"></i> <span>Request Barang</span>
+                    <i class="fa fa-comments-o"></i> <span>Request Barang</span>
                 </a>
             </li>
             @endif
